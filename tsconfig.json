@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "target": "ES5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
+        "noImplicitAny": false
+    },
+    "exclude": [
+        "node_modules",
+        ".meteor"
+    ],
+    "include": [
+        "imports/**/*.ts",
+        "imports/**/*.tsx",
+        "typings/*.d.ts",
+        "typings/**/*.d.ts",
+        "packages/**/*.tsx",
+        "packages/**/*.ts",
+        "packages/**/*.d.ts",
+        "node_modules/@types/**/*.d.ts"
+    ]
+}

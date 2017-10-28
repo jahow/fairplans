@@ -1,0 +1,957 @@
+$timeline-height: 100px;
+$timeline-background-color: #25211f;
+$timeline-border-color: #907b6f;
+$timeline-highlight-color: #c7a490;
+$timeline-highlight-background-color: #403732;
+
+& {
+
+}
+
+
+// TIMELINE
+
+.timeline {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	height: $timeline-height;
+	background-color: $toolbar-background;
+
+	.month-blocks-container {
+		position: relative;
+		left: 50%;
+		height: 100%;
+	}
+
+	.period-selector {
+		@include no-text-selection();
+		position: absolute;
+	    border-radius: 6px;
+	    border: 3px solid $interactable-background;
+	    background-color: rgba($interactable-background, 0.25);
+	    height: $timeline-height + 3px;
+	    left: 50%;
+	    margin-left: -3px;
+	    top: -6px;
+	    cursor: pointer;
+	    box-sizing: content-box;
+
+	    &:hover {
+	    	border-color: $interactable-background-hover;
+	    	background-color: rgba($interactable-background-hover, 0.25);
+	    }
+	}
+
+	.timeline-month-container {
+		position: absolute;
+
+		background-color: $timeline-background-color;
+		top: 20px;
+		bottom: 13px;
+		text-align: left;
+		font-size: 0.9em;
+		display: flex;
+		flex-shrink: 0;
+		height: auto;
+
+		&:before {
+			content: '';
+			position: absolute;
+			width: 0px;
+			left: -1px;
+			bottom: 0px;
+			top: 0px;
+			border-left: 1px dashed $timeline-border-color;
+		}
+
+		.month-label {
+			position: absolute;
+			bottom: 100%;
+			left: 0px;
+			width: 100%;
+			color: $timeline-highlight-color;
+			line-height: 1.1em;
+			padding-left: 8px;
+			font-size: 0.9em;
+			@include no-text-selection();
+			letter-spacing: 4px;
+
+			&:before {
+				content: '';
+				position: absolute;
+				width: 0px;
+				height: 8px;
+				left: -1px;
+				bottom: 0px;
+				border-left: 1px solid $timeline-border-color;
+			}
+		}
+
+		.day-block {
+			@include monospace;
+			@include no-text-selection();
+			border-top: 1px solid $timeline-border-color;
+			border-bottom: 1px solid $timeline-border-color;
+		    cursor: pointer;
+		    position: relative;
+			color: $timeline-highlight-color;
+
+			&.present {
+				background-color: $timeline-highlight-background-color;
+				color: white;
+				border-top-color: white;
+				border-bottom-color: white;
+			}
+			&.span-end {
+				border-right: 1px solid $timeline-border-color;
+			}
+
+			&:hover {
+				background-color: #1c4531;
+				color: #b9ffdd;
+				border-top-color: #b9ffdd;
+				border-bottom-color: #b9ffdd;
+			}
+
+			.project-dist {
+				position: absolute;
+				left: 0px;
+				width: 100%;
+				bottom: 0px;
+				top: 0px;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+
+				div {
+					background-color: rgba(30, 70, 90, 0.42);
+				}
+
+				&.future {
+					opacity: 0.5;
+				}
+			}
+
+			.day-label {
+				position: absolute;
+				top: 100%;
+				width: 100%;
+		    	text-align: center;
+				font-size: 0.7em;
+			    font-weight: bold;
+			}
+		}
+
+	}
+}
+
+
+// MAIN VIEW (center)
+
+$month-day-height: 90px;
+
+.main-view {
+	position: absolute;
+	left: 0px;
+	top: $timeline-height;
+	bottom: $toolbar-height;
+	color: white;
+	width: 100%;
+}
+
+.timetable {
+	position: relative;
+	height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+	.day-blocks-container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+
+		.day-block {
+			position: absolute;
+			padding-left: 4%;
+			padding-right: 4%;
+			transform: translate(-50%, -50%);
+			height: 80%;
+		}
+
+		.day-span-container {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.period-label {
+		position: absolute;
+		bottom: 100%;
+		line-height: 3em;
+		left: 0px;
+		right: 0px;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: bold;
+		opacity: $secondary-opacity;
+		pointer-events: none;
+		@include no-text-selection;
+	}
+
+	.previous, .next {
+		position: absolute;
+		background-color: white;
+		opacity: $secondary-opacity/2;
+		border-radius: 46px;
+		font-size: 2em;
+		font-weight: bold;
+		width: 46px;
+		height: 46px;
+		color: $main-area-background;
+		cursor: pointer;
+		top: 50%;
+		transform: translate(0%, -50%);
+		text-align: center;
+		line-height: 46px;
+		z-index: 1000;
+
+		&.previous {
+			left: -10px;
+			&:before { content: '❰'; }
+			padding-right: 4px;
+			pointer-events: initial;
+		}
+
+		&.next {
+			right: -10px;
+			&:before { content: '❱'; }
+			padding-left: 4px;
+			pointer-events: initial;
+		}
+
+		&:hover {
+			opacity: $secondary-opacity;
+		}
+	}
+
+	.week-blocks-container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+
+		.week-block {
+			position: absolute;
+			display: flex;
+			flex-direction: row;
+			padding-left: 4%;
+			padding-right: 4%;
+
+			transform: translate(-50%, -50%);
+			height: 80%;
+
+			&.alt-display {
+				flex-direction: column;
+				max-height: 80%;
+				height: auto;
+
+				.day-span-container {
+					width: auto;
+	    			flex-direction: row;
+				}
+			}
+		}
+
+		.day-span-container {
+		    flex-grow: 1;
+		    flex-shrink: 0;
+		    margin: 4px;
+			width: 20px;	// minimum
+			height: auto;
+		}
+	}
+
+	.month-blocks-container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+
+		.month-block {
+			position: absolute;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-content: center;
+			padding-left: 4%;
+			padding-right: 4%;
+
+			transform: translate(-50%, -50%);
+			min-height: 80%;
+			// pointer-events: none;
+		}
+
+		.day-span-container, .padding {
+		    width: calc((100% / 7) - 8px);
+		    margin: 4px;
+			height: $month-day-height;
+    		max-height: 20%;
+		}
+
+		.time-card-container {
+			.time-card > * { display: none; }
+		}
+	}
+
+	.day-span-container {
+		// default day block appearance
+		background-color: rgba($timeline-background-color, 0.45);
+		color: white;
+		border-radius: 4px;
+		font-size: 0.8em;
+		overflow: visible;
+		position: relative;
+		@include no-text-selection();
+	    display: flex;
+	    flex-direction: column;
+
+		&.today {
+			background-color: $timeline-background-color;
+
+			.header {
+				background-color: $object-card-selected-back;
+			}
+		}
+
+		&.weekend {
+			background-color: rgba($timeline-background-color, 0.3);
+		}
+
+		& > .header {
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+			padding: 2px;
+			color: white;
+			border-bottom: 2px solid $main-area-background;
+			display: flex;
+    		flex-direction: row;
+    		align-items: center;
+
+			* {
+				line-height: 1.0em;
+				margin-right: 4px;
+				pointer-events: none;
+			}
+
+			.day-number {
+				@include monospace;
+				border-radius: 2px;
+				padding: 2px;
+				background-color: rgba(0, 0, 0, 0.3);
+				flex-shrink: 0;
+			}
+
+			.weekday {
+				white-space: nowrap;
+				overflow: hidden;
+    			text-overflow: ellipsis;
+    			min-width: 0;
+			}
+		}
+
+		& > .body {
+		    flex-grow: 1;
+		    margin: 4px;
+		    position: absolute;
+		    top: 18px;
+		    bottom: 0px;
+		    left: -70px;
+		    right: -70px;
+		    padding-left: 70px;
+		    padding-right: 70px;
+		    overflow: hidden;
+		    pointer-events: none;
+
+			.cards-container {
+				// position: absolute;
+				// left: 0px;
+				// top: 0px;
+				// right: 0px;
+				// bottom: 0px;
+				position: relative;
+				flex-grow: 1;
+				pointer-events: initial;
+			}
+			.time-cards-container {
+				// left: 26px;
+			}
+			.expense-cards-container {
+				display: flex;
+				flex-direction: column;
+				margin-top: -4px;
+			}
+
+			// GRIDLINES
+			.gridlines-container {
+				pointer-events: initial;
+				position: relative;
+				// height: 100%;
+				width: 24px;
+				margin-right: 2px;
+
+				.gridline {
+					position: absolute;
+					left: 0px;
+					right: 0px;
+					padding-top: 2px;
+					border-top: 1px solid white;
+					opacity: 0.1;
+					font-size: 0.7em;
+					line-height: 1em;
+					@include no-text-selection;
+					pointer-events: none;
+					text-align: center;
+
+					// .label {
+					// 	font-weight: normal;
+					// 	color: white;
+					// 	padding: 0px;
+					// }
+
+					&.main {
+						opacity: 0.3;
+					}
+
+					&.now {
+						opacity: 1;
+						border-color: $interactable-background-hover;
+						border-top-width: 2px;
+						color: $interactable-background-hover;
+						font-weight: bold;
+						font-size: 0.8em;
+					}
+
+					// &.last {
+					// 	border-top: none;
+					// 	border-bottom: 1px solid white;
+					// 	transform: translate(0, -100%);
+					// }
+				}
+
+				&:hover .gridline {
+					&.main { opacity: 0.6; }
+					&.now { opacity: 1; }
+				}
+			}
+
+			// TODO: horizontal mode
+		}
+
+		// hours total at the bottom
+		.hours-total {
+			position: absolute;
+			top: calc(100% + 6px);
+			left: 50%;
+			transform: translate(-50%, 0);
+
+			background-color: rgba($timeline-background-color, 0.3);
+			color: white;
+			border-radius: 4px;
+			// opacity: 0.8;
+			padding: 6px;
+			line-height: 1em;
+			font-size: 0.9em;
+			white-space: nowrap;
+		}
+
+		.cards-preview {
+			.card {
+				background-color: rgba(30, 70, 90, 0.65);
+			}
+		}
+
+		&.clickable {
+			cursor: pointer;
+			// transition: background-color ease-in 0.3s;
+
+			&:hover {
+				background-color: #081b25;
+				// transition: none;
+			}
+		}
+	}
+}
+
+
+// TASK CATALOG
+
+.task-catalog {
+	background-color: $toolbar-background;
+	flex-shrink: 0;
+
+	&.closed {
+	    @include no-text-selection;
+		width: $overlay-button-size;
+	    color: rgba(white, 0.5);
+	    cursor: pointer;
+
+	    font-size: 1.2em;
+	    font-weight: bold;
+	    align-items: center;
+
+	    * {
+	    	height: $overlay-button-size;
+	    	line-height: $overlay-button-size * 1.05;
+	    	white-space: nowrap;
+	    	// margin-bottom: 50px;
+	    }
+
+		&:hover {
+	    	color: white;
+	    	background-color: mix(white, $toolbar-background, 10%);
+		}
+
+		.tab-label {
+			transform: rotate(-90deg) translate(-50%, 0);;
+		}
+	}
+
+	.object-card {
+
+		.background {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+			border-top-right-radius: 2px;
+			border-bottom-right-radius: 2px;
+		}
+	}
+
+	&.opened {
+		width: 30%;
+	}
+}
+
+
+// TIME CARDS
+
+.time-card-container, .expense-card-container {
+	position: relative;
+	font-size: 12px;
+	//background-color: $object-card-back;
+	background-color: #00b05a;
+
+	&.time-card-container {
+		position: absolute;
+		z-index: 100;
+		top: 0px;
+	    right: 0px;
+		left: 0px;
+	}
+
+	&.expense-card-container {
+		margin-top: 4px;
+	}
+
+	&.placeholder {
+	    background: none;
+	    border: 3px solid white;
+	    pointer-events: none;
+
+	    &.invalid {
+	    	border-color: #f4533b;
+	    	background-color: rgba(#f4533b, 0.2);
+
+	    	.time-badge { color: #f4533b; }
+	    }
+	}
+
+	// &.floating {
+	// 	pointer-events: none;
+	// 	opacity: 0.7;
+	// 	transform: translateY(-4px);
+	// }
+
+	&.focus {
+		z-index: 300;
+		transform: translateY(-4px);
+		transition: transform 0.07s ease-out;
+	}
+
+	&.resized {
+		pointer-events: none;
+	}
+
+	.time-badge {
+		position: absolute;
+		transform: translate(0, -50%);
+		font-weight: bold;
+		font-size: 0.8em;
+		color: white;
+		display: none;
+		right: calc(100% + 2px);
+		border-radius: 2px;
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 4px;
+		line-height: 1em;
+
+		&.start { top: 0%; }
+		&.end { top: 100%; }
+	}
+	&:hover .time-badge, &.hovered .time-badge {
+		display: block;
+	}
+	&.placeholder .time-badge {
+		display: block;
+		right: calc(100% + 5px);
+		&.start { top: calc(0% - 3px); }
+		&.end { top: calc(100% - 3px); }
+	}
+
+	.time-card, .expense-card {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		border: 3px solid transparent;
+
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+
+		cursor: -webkit-grab;
+		cursor: grab;
+
+		.body {
+			flex-shrink: 1;
+			flex-grow: 1;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+			justify-content: flex-start;
+
+			& > * {
+				position: relative;
+				color: white;
+				text-align: left;
+				line-height: 1em;
+				padding: 2px;
+				flex-shrink: 0;
+				overflow: hidden;
+			}
+
+			.task {
+				font-weight: 500;
+				white-space: nowrap;
+			}
+
+			.customer {
+				white-space: nowrap;
+			}
+
+
+			.note {
+				flex-shrink: 1;
+				flex-grow: 1;
+				font-size: 0.95em;
+
+				background-color: rgba(0, 0, 0, 0.2);
+				padding: 2px;
+				text-shadow: none;
+				color: rgba(255, 255, 255, 0.8);
+			}
+		}
+
+		.footer {
+			color: white;
+			font-size: 0.95em;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+		    padding: 0px;
+			overflow: hidden;
+			position: absolute;
+
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+
+			& > * {
+				background-color: rgba(0, 0, 0, 0.35);
+				padding: 2px;
+				line-height: 1em;
+				margin-left: 2px;
+				flex-shrink: 0;
+				font-variant: small-caps;
+			}
+
+		}
+
+		.handle {
+			position: absolute;
+			z-index: 200;
+			left: -3px;
+			right: -3px;
+			height: 8px;
+			cursor: ns-resize;
+
+			&.start { top: -3px; }
+			&.end { bottom: -3px; }
+
+			&:hover {
+				//background-color: rgba(255, 255, 255, 0.3);
+			}
+		}
+
+		&.horizontal {
+			.handle {
+				top: 0px;
+				bottom: 0px;
+				width: 8px;
+				cursor: ew-resize;
+
+				&.start { left: 0px; }
+				&.end { right: 0px; }
+			}
+		}
+
+		.actions {
+			position: absolute;
+			display: none;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			// display: flex;
+			flex-direction: row;
+			z-index: 300;
+			border-radius: 44px;
+
+			div {
+				position: relative;
+				cursor: pointer;
+				margin: 4px;
+				width: 44px;
+				height: 44px;
+				background-color: white;
+				border-radius: 44px;
+				color: white;
+				opacity: 0.5;
+				background-size: 60%;
+				background-position: 50% 50%;
+				background-repeat: no-repeat;
+
+				span {
+					position: absolute;
+					width: 100%;
+					top: 100%;
+					pointer-events: none;
+					display: none;
+				    font-weight: bold;
+				    text-align: center;
+				    text-transform: uppercase;
+				    font-size: 0.95em;
+				}
+
+				&:hover {
+					opacity: 1;
+					span { display: initial; }
+				}
+			}
+
+			.submit {
+				background-image: url(img/icon-approve-black.png);
+			}
+			.delete {
+				background-image: url(img/icon-delete.png);
+				background-color: #ff3030;
+				// color: #ff5555;
+			}
+			.approve {
+				background-image: url(img/icon-approve-black.png);
+			}
+			.edit {
+				background-image: url(img/icon-edit-black.png);
+			}
+
+			.show {
+				background-image: url(img/icon-plus-black.png);
+				width: 32px;
+				height: 32px;
+				background-color: white;
+				border-radius: 32px;
+			}
+		}
+
+		&.active {
+			.actions {
+				display: none;
+			}
+		}
+	}
+
+	&:hover, &.hovered {
+		.time-card, .expense-card {
+			border-color: rgba(255, 255, 255, 0.4);
+			background-color: rgba(255, 255, 255, 0.2);
+			z-index: 100;
+
+			.actions {
+				display: flex;
+			}
+		}
+	}
+
+	.background {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+	}
+
+	&.future {
+		background-color: rgba(86, 140, 113, 0.45);
+	}
+
+	&.locked {
+		pointer-events: none;
+		background-color: #648798;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			background-size: 32px;
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+			background-image: url(img/icon-lock.png);
+			opacity: 0.25;
+		}
+	}
+
+	&.temporary {
+		opacity: 0.4;
+		background-color: rgba(86, 140, 113, 0.45);
+		cursor: normal;
+
+		.handle { display: none; }
+
+		&:hover, &.hovered {
+			opacity: 1;
+			
+			.time-card { border-color: transparent; }
+		}
+
+		.time-card {
+			cursor: default;
+		}
+	}
+
+	.sync-status {
+		position: absolute;
+		top: 3px;
+		right: 3px;
+		z-index: 100;
+	}
+}
+
+
+// PROJECTS OVERVIEW
+
+.projects-overview {
+	padding-top: $inner-gutter;
+	padding-bottom: $outer-gutter * 2;
+
+	$bar-height: 18px;
+
+	.calendar-overview-line {
+		// min-height: 50px;
+		margin-top: 4px;
+		background-color: $timeline-background-color;
+		font-weight: 500;
+
+		.project-boxes-container {
+			position: relative;
+			width: 100%;
+			left: 50%;
+			bottom: 0px;
+			@include no-text-selection;
+			// @include monospace;
+			min-height: $bar-height * 3;
+			pointer-events: none;
+
+			.project-box {
+				pointer-events: initial;
+				position: absolute;
+				// border: 1px solid white;
+				background-color: rgba(white, 0.3);
+				color: white;
+				font-size: $bar-height;
+				height: $bar-height - 2px;
+				line-height: $bar-height - 8px;
+				border: 2px solid rgba(white, 0.2);
+				transform: translate(-1px, 0);
+				cursor: help;
+
+				span {
+					padding: 2px;
+					font-size: 12px;
+					text-shadow: 0px 0px 3px black;
+				}
+
+				&:hover { border-color: rgba(white, 0.6); }
+			}
+		}
+
+		.time-marks-container {
+			position: relative;
+			width: 100%;
+			left: 50%;
+			bottom: 0px;
+			font-size: 0.7em;
+			height: 2em;
+			margin-top: 4px;
+			@include no-text-selection;
+			// @include monospace;
+			pointer-events: none;
+
+			.time-mark {
+				position: absolute;
+				border-left: 1px solid rgba(white, 0.8);
+				color: rgba(white, 0.6);
+				padding-left: 4px;
+				line-height: 1em;
+				transform: translate(-1px, 0);
+
+				&.secondary {
+					top: 1em;
+				}
+
+				&.today {
+					border-left: 3px solid $interactable-background-hover;
+					color: $interactable-background-hover;
+					transform: translate(-3px, 0);
+				}
+			}
+		}
+	}
+
+	.group-filter {
+		position: absolute;
+		background-color: rgba(#050b0d, 0.7);
+		bottom: $inner-gutter / 2;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+}

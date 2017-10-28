@@ -1,0 +1,107 @@
+
+# CHOICE LISTS
+
+Customer: Client
+Supplier: Fournisseur
+Lead: Prospect
+
+Service: Service
+Material: Produit
+
+Planned: Planifié
+Scheduled: Programmé
+In Progress: En cours
+Closed: Terminé
+Canceled: Annulé
+
+Active: Actif
+Disabled: Inactif
+Archived: Archivé
+
+ALERTLEVEL_NONE: Néant
+ALERTLEVEL_LOW: Bas
+ALERTLEVEL_MEDIUM: Moyen
+ALERTLEVEL_HIGH: Haut
+ALERTLEVEL_CRITICAL: Critique
+
+France: France
+Switzerland: Suisse
+England: Angleterre
+Germany: Allemagne
+United States: Etats-Unis
+
+
+# UI TEXTS
+
+Company: Organisation
+Companies: Organisations
+Product: Article
+Products: Articles
+Partner: Partenaire
+Partners: Partenaires
+Project: Projets
+Projects: Projets
+
+Sales Orders: Commandes
+Description: Description
+Validity dates: Dates de validité
+Project status: Statut du projet
+Alert level: Niveau d'alerte
+Managers: Responsables
+Members: Membres
+Billing Section: Poste de facturation
+Billing Sections: Postes de facturation
+Task: Tâche
+Tasks: Tâches
+Milestones: Jalons
+Total Time: Total d'heures
+Begin Date: Date de début
+End Date: Date de fin
+
+search for: rechercher
+filter type: filtrer par type
+
+Properties: Propriétés
+Code: Code
+Name: Nom
+Type: Type
+Description: Description
+Language: Langue
+Default Currency: Devise par défaut
+Country: Pays
+Address: Adresse
+City: Ville
+Status: Statut
+
+Company Code: Code organisation
+Company Name: Nom organisation
+Currency: Devise
+
+Partner Code: Code partenaire
+Partner Name: Nom partenaire
+
+Product Code: Code article
+Product Type: Catégorie
+Product Name: Nom article
+Last Updated: Mise à jour
+Created on: Créé le
+Updated on: Mis à jour le
+
+update: enregistrer
+revert: restaurer
+archive: archiver
+delete: supprimer
+
+add new task: nouvelle tâche
+
+Related projects: Projets associés
+
+Search: Rechercher
+by company: par organisation
+by customer: par client
+by status: par statut
+for: client
+
+
+# various
+None: Aucun

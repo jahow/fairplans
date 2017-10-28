@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/twastvedt/typed-meteor-collection-hooks/ee2ca3c6f77c2f8235ae7fe1455f364bdcab7d2e/typings.json",
+    "raw": "registry:global/meteor-collection-hooks#0.8.1+20160610174031",
+    "main": "index.d.ts",
+    "version": "0.8.1",
+    "name": "meteor-collection-hooks",
+    "type": "typings"
+  }
+}

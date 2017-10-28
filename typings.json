@@ -1,0 +1,10 @@
+{
+  "globalDependencies": {
+    "classnames": "registry:dt/classnames",
+    "es6-shim": "registry:dt/es6-shim",
+    "meteor": "registry:env/meteor",
+    "meteor-collection-hooks": "registry:global/meteor-collection-hooks",
+    "moment": "registry:dt/moment",
+    "mongoose": "registry:dt/mongoose",
+  }
+}

@@ -1,0 +1,61 @@
+_locale: en-us
+
+# CHOICE LISTS
+
+PARTNER_CUSTOMER: Customer
+PARTNER_SUPPLIER: Supplier
+PARTNER_LEAD: Lead
+
+PRODUCT_SERVICE: Service
+PRODUCT_MATERIAL: Material
+
+PROJECTSTATUS_PLANNED: Planned
+PROJECTSTATUS_SCHEDULED: Scheduled
+PROJECTSTATUS_IN_PROGRESS: In Progress
+PROJECTSTATUS_CLOSED: Closed
+PROJECTSTATUS_CANCELED: Canceled
+
+OBJECTSTATUS_ACTIVE: Active
+OBJECTSTATUS_DISABLED: Disabled
+OBJECTSTATUS_ARCHIVED: Archived
+
+ALERTLEVEL_NONE: None
+ALERTLEVEL_LOW: Low
+ALERTLEVEL_MEDIUM: Medium
+ALERTLEVEL_HIGH: High
+ALERTLEVEL_CRITICAL: Critical
+
+COUNTRY_FRANCE: France
+COUNTRY_SWITZERLAND: Switzerland
+COUNTRY_ENGLAND: England
+COUNTRY_GERMANY: Germany
+
+
+# UI TEXTS
+
+Company: Company
+Product: Product
+Products: Products
+
+search for...: search for...
+filter type...: filter type...
+
+Properties: Properties
+Code: Code
+Name: Name
+Type: Type
+Description: Description
+
+Product Code: Product Code
+Product Type: Product Type
+Product Name: Product Name
+Last Updated: Last Updated
+Created on: Created on
+Updated on: Updated on
+
+updated: update
+revert: revert
+archive: archive
+delete: delete
+
+Related projects: Related Projects
